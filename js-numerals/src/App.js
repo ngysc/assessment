@@ -12,7 +12,6 @@ function App() {
         </p>
         <div className="App-converter">
           <ConversionForm />
-          <h5>Converted number:</h5>
         </div>
       </header>
     </div>

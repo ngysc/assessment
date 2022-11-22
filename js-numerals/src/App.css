@@ -14,14 +14,15 @@
 }
 
 .App-converter {
+  padding: 1rem;
   min-height: 20rem;
   width: 45rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid rgb(185, 183, 183);
-  border-radius: 5px;
+  border: 2px dashed rgb(16, 160, 100);
+  border-radius: 10px;
 }
 
 .wrapper {
@@ -45,4 +46,10 @@
   width: 15rem;
   height: 3rem;
   margin-top: 1rem;
+  font-size: large;
+  padding: 5px;
+}
+
+.wrapper input:focus {
+  border: 3px solid rgb(10, 151, 86);
 }
