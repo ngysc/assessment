@@ -9,45 +9,47 @@ const ConversionForm = () => {
     setNumber(Number(e.target.value));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
     return setResult(convertNumber(number));
   };
 
   const convertNumber = (inputNumber) => {
     const ones = [
       "",
-      "One",
-      "Two",
-      "Three",
-      "Four",
-      "Five",
-      "Six",
-      "Seven",
-      "Eight",
-      "Nine",
-      "Ten",
-      "Eleven",
-      "Twelve",
-      "Thirteen",
-      "Fourteen",
-      "Fifteen",
-      "Sixteen",
-      "Seventeen",
-      "Eightteen",
-      "Nineteen",
+      "one",
+      "two",
+      "three",
+      "four",
+      "five",
+      "six",
+      "seven",
+      "eight",
+      "nine",
+      "ten",
+      "eleven",
+      "twelve",
+      "thirteen",
+      "fourteen",
+      "fifteen",
+      "sixteen",
+      "seventeen",
+      "eighteen",
+      "nineteen",
     ];
 
     const tens = [
       "",
       "",
-      "Twenty",
-      "Thirty",
-      "Fourty",
-      "Fifty",
-      "Sixty",
-      "Seventy",
-      "Eigthy",
-      "Ninety",
+      "twenty",
+      "thirty",
+      "forty",
+      "fifty",
+      "sixty",
+      "seventy",
+      "eigthy",
+      "ninety",
     ];
 
     if (inputNumber < 0) {
@@ -60,13 +62,13 @@ const ConversionForm = () => {
       return "You must enter a number.";
     }
 
-    let billion = Math.floor(inputNumber / 1000000000); /* billion */
+    let billion = Math.floor(inputNumber / 1000000000);
     inputNumber -= billion * 1000000000;
-    let million = Math.floor(inputNumber / 1000000); /* million */
+    let million = Math.floor(inputNumber / 1000000);
     inputNumber -= million * 1000000;
-    let thousand = Math.floor(inputNumber / 1000); /* thousand */
+    let thousand = Math.floor(inputNumber / 1000);
     inputNumber -= thousand * 1000;
-    let hundred = Math.floor(inputNumber / 100); /* Tens (deca) */
+    let hundred = Math.floor(inputNumber / 100);
     inputNumber = inputNumber % 100; /* Ones */
     let ten = Math.floor(inputNumber / 10);
     let one = Math.floor(inputNumber % 10);
@@ -81,10 +83,10 @@ const ConversionForm = () => {
     }
     if (thousand > 0) {
       result +=
-        (result === "" ? "" : " ") + convertNumber(thousand) + " Thousand";
+        (result === "" ? "" : " ") + convertNumber(thousand) + " thousand";
     }
 
-    if (ten) {
+    if (hundred) {
       result +=
         (result === "" ? "" : " ") + convertNumber(hundred) + " hundred";
     }
