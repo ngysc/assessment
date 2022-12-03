@@ -1,6 +1,15 @@
 import axios from "axios";
 import React from "react";
-import { Card, CardBody, CardText } from "reactstrap";
+import {
+  CardGroup,
+  Card,
+  CardBody,
+  CardText,
+  CardFooter,
+  Button,
+  Col,
+  Row,
+} from "reactstrap";
 
 interface User {
   id: string;
@@ -35,9 +44,9 @@ const ListUsers = () => {
         setUsers(response.data);
         setLoading(false);
       })
-      .catch((ex) => {
+      .catch((e) => {
         const error =
-          ex.response.status === 404
+          e.response.status === 404
             ? "Resource Not found"
             : "An unexpected error has occurred";
         setError(error);
@@ -47,23 +56,44 @@ const ListUsers = () => {
 
   return (
     <>
-      {users.map((user: User) => (
-        <Card
-          className="my-2"
-          color="secondary"
-          style={{
-            width: "18rem",
-          }}
-        >
-          <CardBody>
-            <CardText>
-              <p>First name: {user.first_name}</p>
-              <p>Last name: {user.last_name}</p>
-              <p>Created at: {user.created_at}</p>
-            </CardText>
-          </CardBody>
-        </Card>
-      ))}
+      <CardGroup className="my-3 justify-content-center">
+        {users.map((user: User) => {
+          const { id, first_name, last_name, created_at } = user;
+          return (
+            <div
+              key={id}
+              style={{
+                width: "18rem",
+              }}
+            >
+              <Row>
+                <Col>
+                  <Card
+                    body
+                    color="dark"
+                    inverse
+                    className="m-2"
+                    style={{
+                      minHeight: "19rem",
+                    }}
+                  >
+                    <CardBody>
+                      <div className="mt-3">
+                        <CardText>First name: {user.first_name}</CardText>
+                        <CardText>Last name: {user.last_name}</CardText>
+                        <CardText>Created at: {user.created_at}</CardText>
+                      </div>
+                    </CardBody>
+                    <CardFooter className="mb-3">
+                      <Button>Show details</Button>
+                    </CardFooter>
+                  </Card>
+                </Col>
+              </Row>
+            </div>
+          );
+        })}
+      </CardGroup>
       {error && <p className="error">{error}</p>}
     </>
   );
