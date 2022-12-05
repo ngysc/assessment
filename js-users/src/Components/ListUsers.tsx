@@ -96,7 +96,7 @@ const ListUsers = () => {
                       </div>
                     </CardBody>
                     <CardFooter className="mb-3">
-                      <Button>Show details</Button>
+                      <Button>Edit user</Button>
                     </CardFooter>
                   </Card>
                 </Col>
