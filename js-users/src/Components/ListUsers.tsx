@@ -66,7 +66,7 @@ const ListUsers = () => {
   const currentPosts = users.slice(firstPostIndex, lastPostIndex);
 
   return (
-    <>
+    <div>
       <CardGroup className="my-3 justify-content-center">
         {currentPosts.map((user: User) => {
           const { id, first_name, last_name, created_at } = user;
@@ -111,8 +111,9 @@ const ListUsers = () => {
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
       />
-      {error && <p className="error">{error}</p>}
-    </>
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+    </div>
   );
 };
 

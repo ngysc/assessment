@@ -24,10 +24,10 @@ const Navigation = () => {
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
             <NavItem>
-              <NavLink href="#">Add User</NavLink>
+              <NavLink href="/new">Add User</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Edit User</NavLink>
+              <NavLink href="/edit">Edit User</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

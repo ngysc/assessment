@@ -23,7 +23,7 @@ const PaginationComponent = (posts: Posts) => {
               <PaginationLink
                 key={index}
                 onClick={() => posts.setCurrentPage(page)}
-                className={page == posts.currentPage ? "active" : ""}
+                className={page === posts.currentPage ? "active" : ""}
               >
                 {page}
               </PaginationLink>
