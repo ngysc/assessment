@@ -9,6 +9,8 @@ import {
   Button,
   Col,
   Row,
+  Input,
+  Label,
 } from "reactstrap";
 import { getUsers } from "../API/apiCalls";
 import { useNavigate } from "react-router-dom";
@@ -33,6 +35,8 @@ const ListUsers = () => {
     number,
     (postsPerPage: number) => void
   ] = React.useState(10);
+  const [status, setStatus]: [string, (status: string) => void] =
+    React.useState("");
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -52,7 +56,7 @@ const ListUsers = () => {
     <div>
       <CardGroup className="my-3 justify-content-center">
         {currentPosts.map((user: User) => {
-          const { id, first_name, last_name, created_at } = user;
+          const { id, first_name, last_name, created_at, status } = user;
           return (
             <div
               key={id}
@@ -72,14 +76,17 @@ const ListUsers = () => {
                     }}
                   >
                     <CardBody>
-                      <div className="mt-3">
+                      <div className="mt-2">
                         <CardText>First name: {first_name}</CardText>
                         <CardText>Last name: {last_name}</CardText>
                         <CardText>Created at: {created_at}</CardText>
                       </div>
                     </CardBody>
-                    <CardFooter className="mb-3">
-                      <Button onClick={() => handleClick(user)}>
+                    <CardFooter className="mb-2">
+                      <Button
+                        onClick={() => handleClick(user)}
+                        className="mb-3"
+                      >
                         Edit user
                       </Button>
                     </CardFooter>

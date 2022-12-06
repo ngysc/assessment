@@ -10,8 +10,12 @@ const UpdateUserForm = () => {
   const selectedUser = location.state.user;
   console.log(selectedUser);
 
-  const [firstName, setFirstName] = React.useState("");
-  const [lastName, setLastName] = React.useState("");
+  const [firstName, setFirstName]: [string, (firstName: string) => void] =
+    React.useState("");
+  const [lastName, setLastName]: [string, (lastName: string) => void] =
+    React.useState("");
+  const [status, setStatus]: [string, (status: string) => void] =
+    React.useState("");
 
   React.useEffect(() => {
     fetch(
@@ -29,11 +33,25 @@ const UpdateUserForm = () => {
         console.log(data);
         setFirstName(data.first_name);
         setLastName(data.last_name);
+        setStatus(data.status);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+
+  const otherStatusOption = () => {
+    let newStatus = "";
+
+    if (selectedUser.status === "active") {
+      newStatus = "locked";
+    }
+    if (selectedUser.status === "locked") {
+      newStatus = "active";
+    }
+
+    return newStatus;
+  };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -88,6 +106,20 @@ const UpdateUserForm = () => {
           />
         </Col>
       </FormGroup>
+      <FormGroup row>
+        <Label for="status">Status</Label>
+        <Col>
+          <Input
+            type="select"
+            onChange={(e) => setStatus(e.target.value)}
+            required
+          >
+            <option value={status}>{status}</option>
+            <option value={otherStatusOption()}>{otherStatusOption()}</option>
+          </Input>
+        </Col>
+      </FormGroup>
+      <FormGroup row></FormGroup>
       <FormGroup row>
         <Col>
           <Button type="submit">Submit</Button>
