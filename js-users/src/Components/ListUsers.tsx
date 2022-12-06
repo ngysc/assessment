@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import PaginationComponent from "./Pagination";
 import {
@@ -11,8 +10,10 @@ import {
   Col,
   Row,
 } from "reactstrap";
+import { getUsers } from "../API/apiCalls";
+import { useNavigate } from "react-router-dom";
 
-interface User {
+export interface User {
   id: string;
   first_name: string;
   last_name: string;
@@ -26,44 +27,26 @@ const defaultUsers: User[] = [];
 const ListUsers = () => {
   const [users, setUsers]: [User[], (users: User[]) => void] =
     React.useState(defaultUsers);
-  const [loading, setLoading]: [boolean, (loading: boolean) => void] =
-    React.useState<boolean>(true);
-  const [error, setError]: [string, (error: string) => void] =
-    React.useState("");
   const [currentPage, setCurrentPage]: [number, (currentPage: number) => void] =
     React.useState(1);
   const [postsPerPage, setPostsPerPage]: [
     number,
     (postsPerPage: number) => void
   ] = React.useState(10);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
-    axios
-      .get<User[]>(
-        "https://assessment-users-backend.herokuapp.com/users.json",
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((response) => {
-        setUsers(response.data);
-        setLoading(false);
-      })
-      .catch((e) => {
-        const error =
-          e.response.status === 404
-            ? "Resource Not found"
-            : "An unexpected error has occurred";
-        setError(error);
-        setLoading(false);
-      });
+    getUsers(setUsers);
+    console.log(users);
   }, []);
 
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
   const currentPosts = users.slice(firstPostIndex, lastPostIndex);
+
+  const handleClick = (user: User) => {
+    navigate("/edit", { state: { user: user } });
+  };
 
   return (
     <div>
@@ -96,7 +79,9 @@ const ListUsers = () => {
                       </div>
                     </CardBody>
                     <CardFooter className="mb-3">
-                      <Button>Edit user</Button>
+                      <Button onClick={() => handleClick(user)}>
+                        Edit user
+                      </Button>
                     </CardFooter>
                   </Card>
                 </Col>
@@ -111,8 +96,6 @@ const ListUsers = () => {
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
       />
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
     </div>
   );
 };

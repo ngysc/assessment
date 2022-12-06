@@ -26,9 +26,6 @@ const Navigation = () => {
             <NavItem>
               <NavLink href="/new">Add User</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink href="/edit">Edit User</NavLink>
-            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>

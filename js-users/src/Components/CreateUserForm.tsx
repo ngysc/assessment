@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Col, Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
+import { createUser } from "../API/apiCalls";
 
 type UserData = {
   first_name: string;
@@ -24,26 +25,7 @@ const CreateUserForm = () => {
       status: status,
     };
 
-    console.log(JSON.stringify(formData));
-
-    axios
-      .post(
-        "https://assessment-users-backend.herokuapp.com/users.json",
-        JSON.stringify(formData),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((response) => {
-        alert("New user added successfully.");
-        return response;
-      })
-      .catch((error) => {
-        alert("An error occured.");
-        console.log(error);
-      });
+    createUser(formData);
   }
 
   return (
