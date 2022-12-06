@@ -2,7 +2,6 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { Button, Col, Form, FormGroup, Input, Label } from "reactstrap";
 import { updateUsers } from "../API/apiCalls";
-import { User } from "./ListUsers";
 
 const UpdateUserForm = () => {
   const location = useLocation();

@@ -1,5 +1,4 @@
-import axios from "axios";
-import { useState } from "react";
+import React from "react";
 import { Col, Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 import { createUser } from "../API/apiCalls";
 
@@ -10,11 +9,20 @@ type UserData = {
 };
 
 const CreateUserForm = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [status, setStatus] = useState("");
-  const [firstNameValidation, setFirstNameValidation] = useState(false);
-  const [lastNameValidation, setLastNameValidation] = useState(false);
+  const [firstName, setFirstName]: [string, (firstName: string) => void] =
+    React.useState("");
+  const [lastName, setLastName]: [string, (lastName: string) => void] =
+    React.useState("");
+  const [status, setStatus]: [string, (status: string) => void] =
+    React.useState("");
+  const [firstNameValidation, setFirstNameValidation]: [
+    boolean,
+    (firstNameValidation: boolean) => void
+  ] = React.useState(false);
+  const [lastNameValidation, setLastNameValidation]: [
+    boolean,
+    (firstNameValidation: boolean) => void
+  ] = React.useState(false);
 
   function handleSubmit(e: any) {
     e.preventDefault();
