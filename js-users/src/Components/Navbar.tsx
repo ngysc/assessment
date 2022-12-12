@@ -15,8 +15,8 @@ const Navigation = () => {
   const toggleNavbar = () => setCollapsed(!collapsed);
 
   return (
-    <div>
-      <Navbar color="faded" light className="mx-5 my-3">
+    <div data-testid="test-3">
+      <Navbar color="faded" light className="navbarContainer mx-5 my-3">
         <NavbarBrand href="/" className="mr-auto">
           Dina Project
         </NavbarBrand>

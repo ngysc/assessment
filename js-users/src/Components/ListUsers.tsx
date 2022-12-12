@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import PaginationComponent from "./Pagination";
 import {
   CardGroup,
@@ -13,7 +13,6 @@ import {
   Label,
 } from "reactstrap";
 import { getUsers } from "../API/apiCalls";
-import { useNavigate } from "react-router-dom";
 
 export interface User {
   id: string;
@@ -26,7 +25,9 @@ export interface User {
 
 const defaultUsers: User[] = [];
 
-const ListUsers = () => {
+type ListUsersProps = { navigate: any };
+
+const ListUsers: FC<ListUsersProps> = ({ navigate }) => {
   const [users, setUsers]: [User[], (users: User[]) => void] =
     React.useState(defaultUsers);
   const [currentPage, setCurrentPage]: [number, (currentPage: number) => void] =
@@ -37,7 +38,6 @@ const ListUsers = () => {
   ] = React.useState(10);
   const [status, setStatus]: [string, (status: string) => void] =
     React.useState("");
-  const navigate = useNavigate();
 
   React.useEffect(() => {
     getUsers(setUsers);
@@ -53,7 +53,7 @@ const ListUsers = () => {
   };
 
   return (
-    <div>
+    <div data-testid="test-1">
       <CardGroup className="my-3 justify-content-center">
         {currentPosts.map((user: User) => {
           const { id, first_name, last_name, created_at, status } = user;

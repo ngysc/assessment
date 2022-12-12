@@ -15,8 +15,11 @@ const PaginationComponent = (posts: Posts) => {
   }
 
   return (
-    <div>
-      <Pagination className="d-flex justify-content-center">
+    <>
+      <Pagination
+        className="d-sm-flex justify-content-center"
+        data-testid="test-4"
+      >
         {pages.map((page, index) => {
           return (
             <PaginationItem>
@@ -31,7 +34,7 @@ const PaginationComponent = (posts: Posts) => {
           );
         })}
       </Pagination>
-    </div>
+    </>
   );
 };
 
