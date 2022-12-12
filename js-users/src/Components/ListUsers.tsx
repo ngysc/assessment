@@ -75,7 +75,13 @@ const ListUsers = () => {
                       minHeight: "21rem",
                     }}
                   >
-                    <CardBody>
+                    <CardBody
+                      style={
+                        status === "locked"
+                          ? { textDecoration: "line-through" }
+                          : {}
+                      }
+                    >
                       <div className="mt-2">
                         <CardText>First name: {first_name}</CardText>
                         <CardText>Last name: {last_name}</CardText>
