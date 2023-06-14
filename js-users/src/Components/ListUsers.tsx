@@ -36,8 +36,6 @@ const ListUsers: FC<ListUsersProps> = ({ navigate }) => {
     number,
     (postsPerPage: number) => void
   ] = React.useState(10);
-  const [status, setStatus]: [string, (status: string) => void] =
-    React.useState("");
 
   React.useEffect(() => {
     getUsers(setUsers);
